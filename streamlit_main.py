@@ -7,7 +7,7 @@ import base64
 # CONFIG
 # ============================================================
 
-API_BASE = "https://dashboard.render.com/web/srv-da08eoegekts739bvcu0/deploys/dep-da08eougekts739bvdfg?r=2026-08-15%4015%3A35%3A03%7E2026-08-15%4015%3A39%3A23"
+API_BASE = "https://hybrid-movie-recommendation-system-dq65.onrender.com"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(
