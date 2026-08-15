@@ -7,7 +7,7 @@ import base64
 # CONFIG
 # ============================================================
 
-API_BASE = "https://hybrid-movie-recommendation-system-dq65.onrender.com"
+API_BASE = "https://hybrid-movie-recommendation-system-d6q5.onrender.com"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(
