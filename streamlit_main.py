@@ -466,7 +466,7 @@ def poster_grid(
 
                     st.image(
                         poster,
-                        use_container_width=True
+                        use_column_width=True
                     )
 
                 else:
