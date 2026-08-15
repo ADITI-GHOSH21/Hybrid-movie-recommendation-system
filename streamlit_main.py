@@ -7,7 +7,7 @@ import base64
 # CONFIG
 # ============================================================
 
-API_BASE = "http://127.0.0.1:8000"
+API_BASE = "https://dashboard.render.com/web/srv-da08eoegekts739bvcu0/deploys/dep-da08eougekts739bvdfg?r=2026-08-15%4015%3A35%3A03%7E2026-08-15%4015%3A39%3A23"
 TMDB_IMG = "https://image.tmdb.org/t/p/w500"
 
 st.set_page_config(
