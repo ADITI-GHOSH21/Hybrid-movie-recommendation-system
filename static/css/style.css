@@ -1,0 +1,1370 @@
+/* ============================================================
+   MOVIEVERSE AI
+   FINAL CINEMATIC PRODUCT UI
+   ============================================================ */
+
+/* ============================================================
+   01 — DESIGN TOKENS
+   ============================================================ */
+
+:root {
+    --mv-bg: #05070d;
+    --mv-bg-deep: #02040a;
+
+    --mv-glass: rgba(8, 12, 24, 0.54);
+    --mv-glass-strong: rgba(7, 11, 23, 0.72);
+    --mv-glass-soft: rgba(255, 255, 255, 0.045);
+
+    --mv-border: rgba(255, 255, 255, 0.105);
+    --mv-border-soft: rgba(255, 255, 255, 0.07);
+    --mv-border-blue: rgba(92, 169, 255, 0.30);
+
+    --mv-white: #ffffff;
+    --mv-text: #f4f7ff;
+    --mv-text-soft: #d7deef;
+    --mv-muted: #9aa8c3;
+    --mv-muted-2: #73819c;
+
+    --mv-blue: #4da3ff;
+    --mv-blue-bright: #69b7ff;
+    --mv-blue-soft: rgba(77, 163, 255, 0.16);
+
+    --mv-violet: #8b6cff;
+    --mv-violet-soft: rgba(139, 108, 255, 0.15);
+
+    --mv-pink: #e85ca8;
+
+    --mv-radius-sm: 10px;
+    --mv-radius: 16px;
+    --mv-radius-lg: 22px;
+    --mv-radius-xl: 28px;
+
+    --mv-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.30);
+
+    --mv-shadow-soft:
+        0 12px 35px rgba(0, 0, 0, 0.22);
+
+    --mv-transition:
+        180ms cubic-bezier(.2, .7, .2, 1);
+}
+
+
+/* ============================================================
+   02 — GLOBAL APP BACKGROUND
+   IMPORTANT:
+   Keep "../images/bg.jpeg" EXACTLY as written.
+   Your Python code replaces this path with base64.
+   ============================================================ */
+
+.stApp {
+    min-height: 100vh !important;
+
+    background:
+        /* very subtle top protection */
+        linear-gradient(
+            180deg,
+            rgba(2, 4, 10, 0.08) 0%,
+            rgba(2, 5, 13, 0.12) 35%,
+            rgba(2, 4, 10, 0.28) 100%
+        ),
+        /* subtle cinematic color atmosphere */
+        radial-gradient(
+            circle at 72% 18%,
+            rgba(66, 119, 255, 0.12),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 28% 72%,
+            rgba(124, 75, 255, 0.08),
+            transparent 34%
+        ),
+        url("../images/bg.jpeg")
+        center center /
+        cover
+        fixed
+        no-repeat !important;
+
+    color: var(--mv-text) !important;
+}
+
+
+/* Make sure Streamlit doesn't place opaque layers over the image */
+
+[data-testid="stAppViewContainer"],
+[data-testid="stAppViewContainer"] > .main,
+.main,
+.block-container,
+[data-testid="stHeader"],
+[data-testid="stDecoration"] {
+    background: transparent !important;
+}
+
+
+/* Header should disappear into the cinematic background */
+
+[data-testid="stHeader"] {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+
+/* ============================================================
+   03 — MAIN CONTENT
+   ============================================================ */
+
+.block-container {
+    max-width: 1500px !important;
+
+    padding-top: 2.5rem !important;
+    padding-bottom: 5rem !important;
+
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+}
+
+
+/* Better spacing between Streamlit blocks */
+
+[data-testid="stVerticalBlock"] {
+    gap: 0.55rem;
+}
+
+
+/* Don't put opaque backgrounds on normal columns */
+
+[data-testid="stHorizontalBlock"],
+[data-testid="column"] {
+    background: transparent !important;
+}
+
+
+/* ============================================================
+   04 — TYPOGRAPHY
+   ============================================================ */
+
+html,
+body,
+.stApp {
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Helvetica,
+        Arial,
+        sans-serif !important;
+}
+
+
+/* Main headings */
+
+.stApp h1,
+.stApp h2,
+.stApp h3,
+.stApp h4,
+.stApp h5,
+.stApp h6 {
+    color: var(--mv-white) !important;
+
+    font-weight: 800 !important;
+
+    letter-spacing: -0.028em;
+
+    text-shadow:
+        0 3px 18px rgba(0, 0, 0, 0.42);
+}
+
+
+/* Main title */
+
+.stApp h1 {
+    font-size:
+        clamp(2.45rem, 4.5vw, 4.35rem) !important;
+
+    line-height: 1.02 !important;
+
+    margin-bottom: 0.45rem !important;
+
+    background:
+        linear-gradient(
+            100deg,
+            #ffffff 0%,
+            #dcecff 42%,
+            #b7cfff 72%,
+            #e4d7ff 100%
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    filter:
+        drop-shadow(0 8px 25px rgba(38, 111, 255, 0.18));
+}
+
+
+/* Section headings */
+
+.stApp h2 {
+    font-size: clamp(1.55rem, 2.2vw, 2rem) !important;
+
+    margin-top: 1.25rem !important;
+    margin-bottom: 0.65rem !important;
+}
+
+
+.stApp h3 {
+    font-size: clamp(1.15rem, 1.7vw, 1.4rem) !important;
+}
+
+
+/* Body text */
+
+.stApp p {
+    color: var(--mv-text-soft);
+    line-height: 1.65;
+}
+
+
+/* Caption */
+
+.stApp .stCaption,
+.stApp small {
+    color: var(--mv-muted) !important;
+}
+
+
+/* ============================================================
+   05 — CINEMATIC LIGHTING
+   ============================================================ */
+
+/*
+   This adds depth without hiding the actual background.
+*/
+
+.block-container::before {
+    content: "";
+
+    position: fixed;
+
+    top: -15%;
+    right: -8%;
+
+    width: 520px;
+    height: 520px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(61, 135, 255, 0.10) 0%,
+            rgba(110, 72, 255, 0.045) 35%,
+            transparent 70%
+        );
+
+    pointer-events: none;
+
+    z-index: -1;
+
+    filter: blur(18px);
+}
+
+
+/* ============================================================
+   06 — SIDEBAR
+   ============================================================ */
+
+section[data-testid="stSidebar"] {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(3, 7, 17, 0.78),
+            rgba(5, 9, 21, 0.70)
+        ) !important;
+
+    border-right:
+        1px solid rgba(255, 255, 255, 0.085) !important;
+
+    box-shadow:
+        16px 0 55px rgba(0, 0, 0, 0.28);
+
+    backdrop-filter:
+        blur(24px)
+        saturate(125%);
+
+    -webkit-backdrop-filter:
+        blur(24px)
+        saturate(125%);
+}
+
+
+/* Sidebar content */
+
+section[data-testid="stSidebar"] > div {
+    background: transparent !important;
+}
+
+
+/* Sidebar spacing */
+
+section[data-testid="stSidebar"] .block-container {
+    padding:
+        1.4rem
+        1.1rem
+        2rem
+        1.1rem !important;
+}
+
+
+/* Sidebar title */
+
+section[data-testid="stSidebar"] h1 {
+    font-size: 1.5rem !important;
+
+    letter-spacing: -0.025em;
+
+    background:
+        linear-gradient(
+            100deg,
+            #ffffff,
+            #a8d3ff 65%,
+            #c9b8ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+
+/* Sidebar headings */
+
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3 {
+    color: #f5f7ff !important;
+}
+
+
+/* Sidebar body text */
+
+section[data-testid="stSidebar"] p,
+section[data-testid="stSidebar"] label {
+    color: var(--mv-text-soft) !important;
+}
+
+
+/* Sidebar captions */
+
+section[data-testid="stSidebar"] .stCaption,
+section[data-testid="stSidebar"] small {
+    color: #8291af !important;
+}
+
+
+/* ============================================================
+   07 — SIDEBAR BUTTONS
+   ============================================================ */
+
+section[data-testid="stSidebar"] button {
+    min-height: 42px !important;
+
+    border-radius:
+        var(--mv-radius-sm) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.065) !important;
+
+    background:
+        rgba(255, 255, 255, 0.032) !important;
+
+    color:
+        #dce8fb !important;
+
+    font-weight: 600 !important;
+
+    transition:
+        background var(--mv-transition),
+        border-color var(--mv-transition),
+        transform var(--mv-transition),
+        box-shadow var(--mv-transition) !important;
+}
+
+
+section[data-testid="stSidebar"] button:hover {
+    background:
+        linear-gradient(
+            135deg,
+            rgba(55, 145, 255, 0.20),
+            rgba(112, 82, 255, 0.13)
+        ) !important;
+
+    border-color:
+        rgba(91, 169, 255, 0.34) !important;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 8px 24px rgba(0, 72, 170, 0.14);
+}
+
+
+/* ============================================================
+   08 — SELECTBOXES
+   ============================================================ */
+
+[data-baseweb="select"] > div {
+    min-height: 42px !important;
+
+    background:
+        rgba(7, 13, 27, 0.58) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10) !important;
+
+    border-radius:
+        var(--mv-radius-sm) !important;
+
+    color:
+        var(--mv-text) !important;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+
+    transition:
+        border-color var(--mv-transition),
+        box-shadow var(--mv-transition) !important;
+}
+
+
+[data-baseweb="select"] > div:hover {
+    border-color:
+        rgba(83, 165, 255, 0.42) !important;
+}
+
+
+[data-baseweb="select"] > div:focus-within {
+    border-color:
+        rgba(87, 170, 255, 0.68) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(66, 145, 255, 0.10) !important;
+}
+
+
+/* Select text */
+
+[data-baseweb="select"] span {
+    color:
+        #edf4ff !important;
+}
+
+
+/* Dropdown popup */
+
+[data-baseweb="popover"] {
+    background:
+        rgba(5, 9, 20, 0.96) !important;
+
+    border:
+        1px solid rgba(103, 166, 255, 0.20) !important;
+
+    border-radius:
+        14px !important;
+
+    box-shadow:
+        0 24px 70px rgba(0, 0, 0, 0.62) !important;
+
+    backdrop-filter:
+        blur(22px) !important;
+
+    -webkit-backdrop-filter:
+        blur(22px) !important;
+}
+
+
+[data-baseweb="menu"] {
+    background: transparent !important;
+}
+
+
+[data-baseweb="option"] {
+    color:
+        #e8effc !important;
+
+    transition:
+        background 140ms ease;
+}
+
+
+[data-baseweb="option"]:hover {
+    background:
+        rgba(65, 140, 255, 0.14) !important;
+}
+
+
+/* ============================================================
+   09 — SEARCH INPUT
+   ============================================================ */
+
+[data-testid="stTextInput"] {
+    margin-top: 0.35rem;
+    margin-bottom: 1.45rem;
+}
+
+
+[data-testid="stTextInput"] label {
+    color:
+        #cbd7eb !important;
+
+    font-size:
+        0.84rem !important;
+
+    font-weight:
+        650 !important;
+}
+
+
+/* Search shell */
+
+[data-testid="stTextInput"] > div > div {
+    min-height: 54px !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(10, 18, 38, 0.66),
+            rgba(8, 13, 29, 0.52)
+        ) !important;
+
+    border:
+        1px solid rgba(122, 179, 255, 0.20) !important;
+
+    border-radius:
+        15px !important;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+
+    backdrop-filter:
+        blur(16px)
+        saturate(120%);
+
+    -webkit-backdrop-filter:
+        blur(16px)
+        saturate(120%);
+
+    transition:
+        border-color var(--mv-transition),
+        box-shadow var(--mv-transition),
+        background var(--mv-transition);
+}
+
+
+/* Search focus */
+
+[data-testid="stTextInput"] > div > div:focus-within {
+    background:
+        rgba(8, 16, 34, 0.72) !important;
+
+    border-color:
+        rgba(86, 174, 255, 0.62) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(64, 146, 255, 0.10),
+        0 15px 42px rgba(0, 55, 155, 0.20),
+        inset 0 1px 0 rgba(255, 255, 255, 0.045);
+}
+
+
+/* Search text */
+
+[data-testid="stTextInput"] input {
+    color:
+        #ffffff !important;
+
+    font-size:
+        1rem !important;
+
+    font-weight:
+        500 !important;
+
+    background:
+        transparent !important;
+}
+
+
+[data-testid="stTextInput"] input::placeholder {
+    color:
+        #7f8daa !important;
+
+    opacity:
+        1 !important;
+}
+
+
+/* ============================================================
+   10 — SLIDERS
+   ============================================================ */
+
+[data-testid="stSlider"] {
+    padding-top: 0.25rem;
+}
+
+
+/* Slider labels */
+
+[data-testid="stSlider"] label {
+    color:
+        #c5d1e7 !important;
+
+    font-weight:
+        600 !important;
+}
+
+
+/* Slider thumb */
+
+[data-testid="stSlider"] [role="slider"] {
+    width: 18px !important;
+    height: 18px !important;
+
+    background:
+        #ffffff !important;
+
+    border:
+        3px solid #5eacff !important;
+
+    box-shadow:
+        0 0 0 5px rgba(76, 160, 255, 0.11),
+        0 4px 14px rgba(0, 0, 0, 0.30) !important;
+}
+
+
+/* ============================================================
+   11 — DIVIDERS
+   ============================================================ */
+
+hr {
+    height: 1px !important;
+
+    border: 0 !important;
+
+    margin:
+        1.55rem 0 !important;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(115, 174, 255, 0.22),
+            rgba(150, 108, 255, 0.16),
+            transparent
+        ) !important;
+}
+
+
+/* ============================================================
+   12 — MOVIE GRID
+   ============================================================ */
+
+/*
+   Keep movie columns completely transparent.
+   The poster itself becomes the visual card.
+*/
+
+[data-testid="stHorizontalBlock"] {
+    background: transparent !important;
+
+    align-items: flex-start !important;
+}
+
+
+/* ============================================================
+   13 — MOVIE POSTERS
+   ============================================================ */
+
+[data-testid="stImage"] {
+    width: 100% !important;
+
+    overflow: hidden !important;
+
+    border-radius:
+        var(--mv-radius) !important;
+}
+
+
+/* Actual poster */
+
+[data-testid="stImage"] img {
+    width: 100% !important;
+
+    aspect-ratio:
+        2 / 3 !important;
+
+    object-fit:
+        cover !important;
+
+    display:
+        block !important;
+
+    border-radius:
+        var(--mv-radius) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.11) !important;
+
+    background:
+        rgba(3, 6, 14, 0.35);
+
+    box-shadow:
+        0 12px 30px rgba(0, 0, 0, 0.34);
+
+    transition:
+        transform 260ms cubic-bezier(.2, .75, .2, 1),
+        box-shadow 260ms ease,
+        border-color 260ms ease,
+        filter 260ms ease;
+}
+
+
+/* Premium poster hover */
+
+[data-testid="stImage"] img:hover {
+    transform:
+        translateY(-7px)
+        scale(1.018);
+
+    border-color:
+        rgba(110, 190, 255, 0.50) !important;
+
+    filter:
+        saturate(1.08)
+        brightness(1.035);
+
+    box-shadow:
+        0 22px 48px rgba(0, 0, 0, 0.48),
+        0 0 28px rgba(50, 135, 255, 0.12);
+}
+
+
+/* ============================================================
+   14 — MOVIE TITLES
+   ============================================================ */
+
+[data-testid="column"] strong {
+    display:
+        block !important;
+
+    margin-top:
+        0.45rem !important;
+
+    color:
+        #f7f9ff !important;
+
+    font-size:
+        0.92rem !important;
+
+    font-weight:
+        700 !important;
+
+    line-height:
+        1.35 !important;
+
+    letter-spacing:
+        -0.01em;
+
+    text-shadow:
+        0 2px 8px rgba(0, 0, 0, 0.55);
+}
+
+
+/* Metadata */
+
+[data-testid="column"] .stCaption {
+    color:
+        #9caac3 !important;
+
+    font-size:
+        0.76rem !important;
+
+    line-height:
+        1.4 !important;
+
+    margin-top:
+        0.12rem !important;
+}
+
+
+/* ============================================================
+   15 — MOVIE ACTION BUTTONS
+   ============================================================ */
+
+[data-testid="column"] button {
+    width:
+        100% !important;
+
+    min-height:
+        38px !important;
+
+    margin-top:
+        0.30rem !important;
+
+    border-radius:
+        11px !important;
+
+    border:
+        1px solid rgba(104, 181, 255, 0.26) !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(50, 143, 255, 0.82),
+            rgba(91, 89, 231, 0.80)
+        ) !important;
+
+    color:
+        #ffffff !important;
+
+    font-size:
+        0.77rem !important;
+
+    font-weight:
+        700 !important;
+
+    box-shadow:
+        0 8px 22px rgba(31, 91, 205, 0.20);
+
+    transition:
+        transform var(--mv-transition),
+        filter var(--mv-transition),
+        box-shadow var(--mv-transition),
+        border-color var(--mv-transition) !important;
+}
+
+
+[data-testid="column"] button:hover {
+    transform:
+        translateY(-2px) !important;
+
+    filter:
+        brightness(1.08) !important;
+
+    border-color:
+        rgba(126, 202, 255, 0.50) !important;
+
+    box-shadow:
+        0 13px 30px rgba(37, 103, 225, 0.30) !important;
+}
+
+
+[data-testid="column"] button:active {
+    transform:
+        translateY(0) !important;
+}
+
+
+/* ============================================================
+   16 — GENERAL STREAMLIT BUTTONS
+   ============================================================ */
+
+.stButton > button {
+    border-radius:
+        12px !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10) !important;
+
+    background:
+        rgba(255, 255, 255, 0.055) !important;
+
+    color:
+        #edf4ff !important;
+
+    font-weight:
+        650 !important;
+
+    transition:
+        all var(--mv-transition) !important;
+}
+
+
+.stButton > button:hover {
+    border-color:
+        rgba(92, 171, 255, 0.42) !important;
+
+    background:
+        rgba(72, 145, 255, 0.13) !important;
+
+    color:
+        #ffffff !important;
+
+    transform:
+        translateY(-1px);
+
+    box-shadow:
+        0 8px 25px rgba(0, 70, 170, 0.15);
+}
+
+
+/* ============================================================
+   17 — CONTAINERS / GLASS PANELS
+   ============================================================ */
+
+/*
+   Streamlit bordered containers.
+   Intentionally subtle so the background remains visible.
+*/
+
+div[data-testid="stVerticalBlockBorderWrapper"] {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(11, 17, 33, 0.52),
+            rgba(7, 11, 24, 0.38)
+        ) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.085) !important;
+
+    border-radius:
+        var(--mv-radius-lg) !important;
+
+    box-shadow:
+        0 16px 50px rgba(0, 0, 0, 0.18),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025) !important;
+
+    backdrop-filter:
+        blur(15px)
+        saturate(115%) !important;
+
+    -webkit-backdrop-filter:
+        blur(15px)
+        saturate(115%) !important;
+}
+
+
+/* ============================================================
+   18 — ALERTS
+   ============================================================ */
+
+[data-testid="stAlert"] {
+    border-radius:
+        14px !important;
+
+    background:
+        rgba(7, 13, 27, 0.68) !important;
+
+    border:
+        1px solid rgba(112, 171, 255, 0.18) !important;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.15);
+
+    backdrop-filter:
+        blur(14px);
+}
+
+
+/* ============================================================
+   19 — CHECKBOX / RADIO
+   ============================================================ */
+
+[data-testid="stCheckbox"] label,
+[data-testid="stRadio"] label {
+    color:
+        #cbd6e9 !important;
+
+    font-weight:
+        550 !important;
+}
+
+
+/* ============================================================
+   20 — NUMBER INPUT
+   ============================================================ */
+
+[data-testid="stNumberInput"] input {
+    color:
+        #ffffff !important;
+
+    background:
+        rgba(7, 13, 27, 0.60) !important;
+
+    border-radius:
+        11px !important;
+}
+
+
+/* ============================================================
+   21 — TEXT AREA
+   ============================================================ */
+
+[data-testid="stTextArea"] textarea {
+    color:
+        #ffffff !important;
+
+    background:
+        rgba(7, 13, 27, 0.58) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10) !important;
+
+    border-radius:
+        13px !important;
+
+    backdrop-filter:
+        blur(12px);
+}
+
+
+[data-testid="stTextArea"] textarea:focus {
+    border-color:
+        rgba(83, 170, 255, 0.62) !important;
+
+    box-shadow:
+        0 0 0 3px rgba(66, 145, 255, 0.10) !important;
+}
+
+
+/* ============================================================
+   22 — DETAILS / MOVIE PAGE
+   ============================================================ */
+
+/*
+   Any wide movie backdrop remains cinematic.
+*/
+
+.stApp img[alt=""] {
+    border-radius:
+        var(--mv-radius-lg);
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.32);
+}
+
+
+/* Details page title */
+
+.stApp h1 {
+    text-shadow:
+        0 5px 25px rgba(0, 0, 0, 0.48);
+}
+
+
+/* ============================================================
+   23 — EXPANDERS
+   ============================================================ */
+
+[data-testid="stExpander"] {
+    background:
+        rgba(7, 12, 25, 0.48) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.08) !important;
+
+    border-radius:
+        14px !important;
+
+    backdrop-filter:
+        blur(12px);
+}
+
+
+[data-testid="stExpander"] summary {
+    color:
+        #edf3ff !important;
+
+    font-weight:
+        650 !important;
+}
+
+
+/* ============================================================
+   24 — TOOLTIP / POPOVER
+   ============================================================ */
+
+[data-baseweb="tooltip"] {
+    background:
+        rgba(5, 8, 17, 0.95) !important;
+
+    border:
+        1px solid rgba(255, 255, 255, 0.10) !important;
+
+    border-radius:
+        9px !important;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.45) !important;
+}
+
+
+/* ============================================================
+   25 — STREAMLIT DEPLOY / TOP CONTROLS
+   ============================================================ */
+
+[data-testid="stToolbar"] {
+    background:
+        transparent !important;
+}
+
+
+/* ============================================================
+   26 — FOOTER
+   ============================================================ */
+
+.stApp > footer {
+    background:
+        transparent !important;
+}
+
+
+/* ============================================================
+   27 — SCROLLBAR
+   ============================================================ */
+
+::-webkit-scrollbar {
+    width:
+        8px;
+
+    height:
+        8px;
+}
+
+
+::-webkit-scrollbar-track {
+    background:
+        rgba(2, 4, 10, 0.45);
+}
+
+
+::-webkit-scrollbar-thumb {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(78, 159, 255, 0.72),
+            rgba(122, 91, 229, 0.68)
+        );
+
+    border-radius:
+        20px;
+
+    border:
+        2px solid rgba(2, 4, 10, 0.40);
+}
+
+
+::-webkit-scrollbar-thumb:hover {
+    background:
+        linear-gradient(
+            180deg,
+            rgba(105, 187, 255, 0.92),
+            rgba(151, 112, 245, 0.90)
+        );
+}
+
+
+/* ============================================================
+   28 — SELECTION
+   ============================================================ */
+
+::selection {
+    background:
+        rgba(75, 157, 255, 0.32);
+
+    color:
+        #ffffff;
+}
+
+
+/* ============================================================
+   29 — TABLES
+   ============================================================ */
+
+.stApp table {
+    background:
+        rgba(6, 10, 22, 0.48) !important;
+
+    border-radius:
+        12px;
+
+    overflow:
+        hidden;
+}
+
+
+.stApp th {
+    color:
+        #e8f0ff !important;
+
+    background:
+        rgba(63, 132, 225, 0.10) !important;
+}
+
+
+.stApp td {
+    color:
+        #c7d2e7 !important;
+
+    border-color:
+        rgba(255, 255, 255, 0.07) !important;
+}
+
+
+/* ============================================================
+   30 — MOBILE / TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+    .block-container {
+        padding-left:
+            2rem !important;
+
+        padding-right:
+            2rem !important;
+    }
+
+}
+
+
+@media (max-width: 900px) {
+
+    .block-container {
+        padding-top:
+            1.6rem !important;
+
+        padding-left:
+            1.25rem !important;
+
+        padding-right:
+            1.25rem !important;
+    }
+
+
+    .stApp h1 {
+        font-size:
+            2.45rem !important;
+    }
+
+
+    .stApp h2 {
+        font-size:
+            1.55rem !important;
+    }
+
+
+    section[data-testid="stSidebar"] {
+        backdrop-filter:
+            blur(22px);
+    }
+
+}
+
+
+@media (max-width: 640px) {
+
+    .stApp {
+        background-attachment:
+            scroll !important;
+
+        background-position:
+            center top !important;
+    }
+
+
+    .block-container {
+        padding-top:
+            1.15rem !important;
+
+        padding-left:
+            0.75rem !important;
+
+        padding-right:
+            0.75rem !important;
+
+        padding-bottom:
+            3rem !important;
+    }
+
+
+    .stApp h1 {
+        font-size:
+            2rem !important;
+
+        line-height:
+            1.08 !important;
+    }
+
+
+    .stApp h2 {
+        font-size:
+            1.4rem !important;
+    }
+
+
+    [data-testid="stImage"] img {
+        border-radius:
+            12px !important;
+    }
+
+
+    [data-testid="stTextInput"] > div > div {
+        min-height:
+            50px !important;
+    }
+
+
+    div[data-testid="stVerticalBlockBorderWrapper"] {
+        border-radius:
+            17px !important;
+    }
+
+}
+
+
+/* ============================================================
+   31 — ACCESSIBILITY
+   ============================================================ */
+
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+[role="slider"]:focus-visible {
+    outline:
+        2px solid rgba(105, 185, 255, 0.75) !important;
+
+    outline-offset:
+        2px !important;
+}
+
+
+/* ============================================================
+   32 — REDUCED MOTION
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation:
+            none !important;
+
+        transition:
+            none !important;
+
+        scroll-behavior:
+            auto !important;
+    }
+
+}
+
+
+/* ============================================================
+   END — MOVIEVERSE AI FINAL UI
+   ============================================================ */
